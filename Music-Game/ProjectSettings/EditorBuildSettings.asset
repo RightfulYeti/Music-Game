@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/JeppeScene.unity
+    guid: b203e7b772a65db4aab2bdec617d4373
   m_configObjects: {}
