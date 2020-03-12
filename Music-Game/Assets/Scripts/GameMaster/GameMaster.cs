@@ -6,7 +6,7 @@ public class GameMaster : MonoBehaviour
 {
     bool Done = false;
     public GameObject[] Men;
-    public Rigidbody RB;
+    public GameObject RB;
 
     // Start is called before the first frame update
     void Start()
@@ -19,22 +19,41 @@ public class GameMaster : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T) && !Done)
         {
             Instantiate(Men[Random.Range(0, Men.Length)]);
-            RB = Men[0].GetComponent<Rigidbody>();
+            //RB = Men[0].GetComponent<Rigidbody>();
             Done = true;
         }
         if (Input.GetKeyDown(KeyCode.Y))
         {
             Done = false;
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+
+        //CopyTransformsRecurse(transform, RB.transform);
+        ApplyForce(RB.transform);
+    }
+
+    private void ApplyForce(Transform target)
+    {
+        foreach (Transform t in target)
         {
-            RB.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(15000, 10000, 0));
-            print("Force!");
+            Rigidbody r = t.GetComponent<Rigidbody>();
+            if (r != null)
+            {
+                r.AddExplosionForce(30, transform.position + transform.right, 10f, 2f); //r.AddExplosionForce(30, transform.position + transform.forward, 10f, 2f);
+            }
+                
+            ApplyForce(t);
         }
-
     }
 
-    void FixedUpdate()
-    {  
-    }
+    //public static void CopyTransformsRecurse(Transform src, Transform dst)
+    //{
+    //    dst.position = src.position;
+    //    dst.rotation = src.rotation;
+    //    foreach (Transform child in dst)
+    //    {
+    //        Transform curSrc = src.Find(child.name);
+    //        if (curSrc)
+    //            CopyTransformsRecurse(curSrc, child);
+    //    }
+    //}
 }
