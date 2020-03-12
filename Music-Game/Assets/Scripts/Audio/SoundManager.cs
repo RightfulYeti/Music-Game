@@ -125,7 +125,7 @@ public class SoundManager : MonoBehaviour
             sounds[i].SetSource(go.AddComponent<AudioSource>());
         }
 
-        PlaySound("Serious2_kor");
+        PlaySound("Music");
     }
 
     public void PlaySound(string _name)
