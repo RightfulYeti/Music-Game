@@ -25,22 +25,34 @@ public class GameMaster : MonoBehaviour
         {
             done = false;
         }
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        RB.GetComponentInChildren<Rigidbody>().velocity = new Vector3(10, 10, 0) * Time.deltaTime;
+        if (done)
         {
-            RB.GetComponent<Animator>().enabled = false;
-           // RB.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(1500, 1000, 1000));
-            print("Force!");
+            for (int i = 0; i < RB.GetComponentsInChildren<Rigidbody>().Length; i++)
+            {
+                //RB.GetComponentsInChildren<Rigidbody>()[i].AddForce(new Vector3(1500, 1000, 1000));
+                RB.GetComponentsInChildren<Rigidbody>()[i].velocity = new Vector3(10, 10, 0) * Time.deltaTime;
+            }
         }
+
+
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    for (int i = 0; i < RB.GetComponentsInChildren<Rigidbody>().Length; i++)
+        //    {
+        //        RB.GetComponentsInChildren<Rigidbody>()[i].AddForce(new Vector3(1500, 1000, 1000));
+        //    }
+        //    print("Force!");
+        //}
 
     }
 
     void FixedUpdate()
     {
-        if (done)
-        {
-            RB.MovePosition(RB.position + new Vector3(1, 1, 0) * Time.fixedDeltaTime);
-        }
+        //if (done)
+        //{
+        //    RB.MovePosition(RB.position + new Vector3(10, 10, 0) * Time.fixedDeltaTime);
+        //}
            
     }
 }

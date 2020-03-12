@@ -10,17 +10,22 @@ public class PlayerController : MonoBehaviour
     public float JumpPower = 0.0f;
     bool FacingRight = true;
     public bool OnGround;
-
+    public Camera Cam;
     Collider[] GroundCollisions;
-    Rigidbody2D RB;
+    Rigidbody RB;
     public LayerMask GroundLayer;
     public Transform GroundCheck;
     private float Timer;
+    Vector3 minScreenBounds;
+    Vector3 maxScreenBounds;
 
     // Start is called before the first frame update
     void Start()
     {
-        RB = GetComponent<Rigidbody2D>();
+        RB = GetComponent<Rigidbody>();
+
+        minScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        maxScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
     }
 
     // Update is called once per frame
@@ -61,6 +66,8 @@ public class PlayerController : MonoBehaviour
             OnGround = false;
             RB.AddForce(new Vector3(0, JumpPower, 0));
         }
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minScreenBounds.x + 1, maxScreenBounds.x - 1), Mathf.Clamp(transform.position.y, minScreenBounds.y + 1, maxScreenBounds.y - 1), transform.position.z);
     }
 
     void Flip()

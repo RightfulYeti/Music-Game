@@ -25,14 +25,5 @@ public class Controller : MonoBehaviour
         mouse_pos.y = mouse_pos.y - object_pos.y;
         angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            GetComponent<Rigidbody2D>().MovePosition(transform.position + new Vector3(-0.1f, 0, 0));
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            GetComponent<Rigidbody2D>().MovePosition(transform.position + new Vector3(0.1f, 0, 0));
-        }
     }
 }
