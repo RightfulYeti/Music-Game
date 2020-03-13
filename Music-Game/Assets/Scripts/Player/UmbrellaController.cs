@@ -10,6 +10,8 @@ public class UmbrellaController : MonoBehaviour
     Vector3 object_pos;
     float angle;
 
+    Vector3 delta_umbrella_pos;
+    Vector3 previous_umbrella_pos;
     Vector3 delta_mouse_pos;
     Vector3 previous_mouse_pos;
     Vector3 orbit_mouse_vector;
@@ -31,6 +33,7 @@ public class UmbrellaController : MonoBehaviour
         orbit_mouse_vector = Input.mousePosition;
 
         delta_mouse_pos = previous_mouse_pos - orbit_mouse_vector;
+        delta_umbrella_pos = previous_umbrella_pos - transform.position;
 
         angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
 
@@ -46,12 +49,13 @@ public class UmbrellaController : MonoBehaviour
             }
             else 
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y + 0.02f, transform.position.z);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z); // change this to make the bounce back smother smaller smother
             }
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
         }
         //delta_mouse_pos = Vector3.zero;
         previous_mouse_pos = orbit_mouse_vector;
+        previous_umbrella_pos = transform.position;
     }
 
     public static Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion angle) {
