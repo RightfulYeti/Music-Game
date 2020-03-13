@@ -7,6 +7,7 @@ public class GameMaster : MonoBehaviour
     bool Done = false;
     public GameObject[] Men;
     public GameObject RB;
+    public GameObject PlayerRef;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class GameMaster : MonoBehaviour
         }
 
         //CopyTransformsRecurse(transform, RB.transform);
-        ApplyForce(RB.transform);
+            ApplyForce(RB.transform);
     }
 
     private void ApplyForce(Transform target)
@@ -38,7 +39,12 @@ public class GameMaster : MonoBehaviour
             Rigidbody r = t.GetComponent<Rigidbody>();
             if (r != null)
             {
-                r.AddExplosionForce(30, transform.position + transform.right, 10f, 2f); //r.AddExplosionForce(30, transform.position + transform.forward, 10f, 2f);
+                if (RB.transform.position.x < PlayerRef.transform.position.x)
+                {
+                    r.AddExplosionForce(30, transform.position + transform.right, 10f, 2f);
+                }
+                else if (RB.transform.position.x > PlayerRef.transform.position.x)
+                    r.AddExplosionForce(30, transform.position + transform.right*-1, 10f, 2f);
             }
                 
             ApplyForce(t);

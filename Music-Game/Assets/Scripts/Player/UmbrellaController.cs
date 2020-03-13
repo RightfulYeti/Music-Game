@@ -10,6 +10,8 @@ public class UmbrellaController : MonoBehaviour
     Vector3 object_pos;
     float angle;
 
+    Vector3 delta_umbrella_pos;
+    Vector3 previous_umbrella_pos;
     Vector3 delta_mouse_pos;
     Vector3 previous_mouse_pos;
     Vector3 orbit_mouse_vector;
@@ -32,6 +34,7 @@ public class UmbrellaController : MonoBehaviour
         orbit_mouse_vector = Input.mousePosition;
 
         delta_mouse_pos = previous_mouse_pos - orbit_mouse_vector;
+        delta_umbrella_pos = previous_umbrella_pos - transform.position;
 
         angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
 
@@ -39,12 +42,13 @@ public class UmbrellaController : MonoBehaviour
             angle *= -1;
         }
 
-        if (delta_mouse_pos.x != 0) {
-            transform.position = RotatePointAroundPivot(transform.position, target.position, Quaternion.Euler(0, 0, angle * Time.deltaTime * 5));
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if (delta_mouse_pos.x != 0)
+        {
+            transform.position = RotatePointAroundPivot(transform.position, target.position, Quaternion.Euler(0, 0, angle * Time.deltaTime * 7));
         }
         //delta_mouse_pos = Vector3.zero;
         previous_mouse_pos = orbit_mouse_vector;
+        previous_umbrella_pos = transform.position;
     }
 
     public static Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion angle) {
