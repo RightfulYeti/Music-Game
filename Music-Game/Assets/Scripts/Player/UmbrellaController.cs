@@ -24,7 +24,6 @@ public class UmbrellaController : MonoBehaviour
     {
         mouse_pos = Input.mousePosition;
         mouse_pos.z = 5.23f; //The distance between the camera and object
-
         object_pos = Camera.main.WorldToScreenPoint(target.position);
         mouse_pos.x = mouse_pos.x - object_pos.x;
         mouse_pos.y = mouse_pos.y - object_pos.y;
@@ -35,13 +34,21 @@ public class UmbrellaController : MonoBehaviour
 
         angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
 
-        if(delta_mouse_pos.x < 0) {
+        if(delta_mouse_pos.x < 0) 
+        {
             angle *= -1;
         }
 
         if (delta_mouse_pos.x != 0) {
-            transform.position = RotatePointAroundPivot(transform.position, target.position, Quaternion.Euler(0, 0, angle * Time.deltaTime * 5));
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            if (transform.position.y >= target.position.y) 
+            {
+                transform.position = RotatePointAroundPivot(transform.position, target.position, Quaternion.Euler(0, 0, angle * Time.deltaTime * 5));
+            }
+            else 
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.02f, transform.position.z);
+            }
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
         }
         //delta_mouse_pos = Vector3.zero;
         previous_mouse_pos = orbit_mouse_vector;
