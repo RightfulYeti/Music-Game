@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
         if (OnGround && Input.GetAxis("Jump") > 0)
         {
-            print("jump");
+            //print("jump");
             OnGround = false;
             RB.AddForce(new Vector3(0, JumpPower, 0));
         }

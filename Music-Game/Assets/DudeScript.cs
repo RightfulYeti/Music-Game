@@ -5,28 +5,27 @@ using UnityEngine;
 public class DudeScript : MonoBehaviour
 {
     bool Throw = false;
+    public GameObject PlayerRef;
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerRef = GameObject.Find("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Throw)
+        {
             ApplyForce(transform);
+            Throw = false;
+        }
+            
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided");
         Collider myCollider = collision.contacts[0].thisCollider;
-        //foreach(ContactPoint Col in collision.contacts)
-        //{
-        //    ApplyForce(Col.thisCollider.transform);
-        //    Throw = true;
-        //}
         Throw = true;
     }
 
@@ -37,7 +36,19 @@ public class DudeScript : MonoBehaviour
             Rigidbody r = t.GetComponent<Rigidbody>();
             if (r != null)
             {
-                r.AddExplosionForce(30, transform.position + transform.right, 10f, 2f);
+                print("Force!");
+                if (PlayerRef.transform.position.x <= r.transform.position.x)
+                {
+                    r.AddForce(50, 100, 0);
+                    // r.AddForce(r.transform.right + transform.up * 1000.0f);
+                    //r.AddExplosionForce(300, transform.position + transform.right, 1000f, 20f);
+                }
+                else
+                {
+                    r.AddForce(-50, 100, 0);
+                    //r.AddForce(r.transform.right + transform.up * -1 * 1000.0f);
+                   // r.AddExplosionForce(300, transform.position + transform.right * -1, 1000f, 20f);
+                }
             }
             ApplyForce(t);
         }

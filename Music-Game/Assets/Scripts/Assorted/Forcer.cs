@@ -23,23 +23,26 @@ public class Forcer : MonoBehaviour
     {
 
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Thing")
-        {
-            //AddForceAtAngle(100, Vector3.Angle(other.transform.position, transform.position)-45);
-            Vector3 direction = transform.position - other.transform.position;
-            GetComponent<Rigidbody2D>().AddRelativeForce(direction * 2500);
-            print(Vector3.Angle(other.transform.position, transform.position)-45);
-        }
+        //if (other.transform.tag == "Thing")
+        //{
+        //    //AddForceAtAngle(100, Vector3.Angle(other.transform.position, transform.position)-45);
+        //    Vector3 direction = transform.position - other.transform.position;
+        //    GetComponent<Rigidbody2D>().AddRelativeForce(direction * 2500);
+        //    print(Vector3.Angle(other.transform.position, transform.position)-45);
+        //}
         if (other.transform.tag == "Wall")
         {
             // creates joint
-            foreach (Transform child in transform.parent.transform)
+            foreach (Transform child in transform.root.transform)
             {
-                Destroy(child.gameObject.GetComponent<Rigidbody2D>());
-                Destroy(child.gameObject.GetComponent<HingeJoint2D>());
-                child.GetComponent<Forcer>().joint = gameObject.AddComponent<FixedJoint>();
+                if (child.GetComponent<Forcer>())
+                {
+                    Destroy(child.gameObject.GetComponent<Rigidbody2D>());
+                    Destroy(child.gameObject.GetComponent<HingeJoint2D>());
+                    child.GetComponent<Forcer>().joint = gameObject.AddComponent<FixedJoint>();
+                }
             }
             // sets joint position to point of contact
             joint.anchor = other.contacts[0].point;
