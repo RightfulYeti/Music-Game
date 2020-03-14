@@ -44,12 +44,12 @@ public class PlayerController : MonoBehaviour
 
         if (Move > 0 && !FacingRight)
         {
-            print("Flipped");
+           // print("Flipped");
             Flip();
         }
         else if (Move < 0 && FacingRight)
         {
-            print("Flipped");
+            //print("Flipped");
             Flip();
         }
 
