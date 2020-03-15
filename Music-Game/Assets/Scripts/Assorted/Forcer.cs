@@ -38,15 +38,7 @@ public class Forcer : MonoBehaviour
             if (!hasCollided) 
             {
                 // creates joint
-                foreach (Transform child in transform.root.transform) 
-                {
-                    if (child.GetComponent<Forcer>()) 
-                    {
-                        Destroy(child.gameObject.GetComponent<Rigidbody2D>());
-                        Destroy(child.gameObject.GetComponent<HingeJoint2D>());
-                        child.GetComponent<Forcer>().joint = gameObject.AddComponent<FixedJoint>();
-                    }
-                }
+                joint = gameObject.AddComponent<FixedJoint>();
                 // sets joint position to point of contact
                 joint.anchor = other.contacts[0].point * 1.25f;
                 // conects the joint to the other object

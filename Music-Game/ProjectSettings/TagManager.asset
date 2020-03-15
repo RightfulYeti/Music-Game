@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Ground
   - Umbrella
+  - Dude
   layers:
   - Default
   - TransparentFX
