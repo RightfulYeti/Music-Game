@@ -2,35 +2,28 @@
 
 public class DudeScript : MonoBehaviour
 {
-    float ray_length = 0.8f;
+    float ray_length = 1.0f;
     public int force = 800;
     bool hasBounced = false;
 
     private void FixedUpdate() 
     {
-        Vector3 down = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+        Vector3 down = new Vector3(transform.position.x, transform.position.y - ray_length, transform.position.z);
         RaycastHit hit;
         Ray ray = new Ray(transform.position, down);
 
-        if (Physics.Raycast(ray, out hit, ray_length)) 
+        Debug.DrawRay(ray.origin, ray.direction * ray_length, Color.red);
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, ray_length)) 
         {
             if (hit.collider.gameObject.tag == "Umbrella") 
             {
+                Vector3 BounceDir = Vector3.Reflect(ray.direction, hit.normal);
+                BounceDir = BounceDir.normalized;
+                BounceDir = new Vector3(BounceDir.x, BounceDir.y, 0);
+                ApplyForce(transform, BounceDir);
+                hasBounced = true;
 
-                if (!hasBounced) 
-                {
-                    Vector3 BounceDir = Vector3.Reflect(ray.direction, hit.normal);
-                    BounceDir = BounceDir.normalized;
-                    float wind = Random.Range(-0.2f, 0.25f);
-                    BounceDir = new Vector3(BounceDir.x + wind, BounceDir.y, 0);
-                    ApplyForce(transform, BounceDir);
-                    hasBounced = true;
-                }
-
-            }
-            else 
-            {
-                hasBounced = false;
             }
         }
     }
