@@ -7,16 +7,13 @@ public class PlayerController : MonoBehaviour
     public float Speed = 0.0f;
     private float Move = 0.0f;
     private float GroundCheckRadius = 0.2f;
-    private float DudeCheckRadius = 0.2f;
     public float JumpPower = 0.0f;
     bool FacingRight = true;
     public bool OnGround;
     public Camera Cam;
     Collider[] GroundCollisions;
-    Collider[] DudeCollisions;
     Rigidbody RB;
     public LayerMask GroundLayer;
-    public LayerMask DudeLayer;
     public Transform GroundCheck;
     private float Timer;
     Vector3 minScreenBounds;
@@ -54,8 +51,7 @@ public class PlayerController : MonoBehaviour
         }
 
         GroundCollisions = Physics.OverlapSphere(GroundCheck.position, GroundCheckRadius, GroundLayer);
-        DudeCollisions = Physics.OverlapSphere(GroundCheck.position, DudeCheckRadius, DudeLayer);
-        if (GroundCollisions.Length > 0 || DudeCollisions.Length > 0)
+        if (GroundCollisions.Length > 0)
         {
             OnGround = true;
         }
