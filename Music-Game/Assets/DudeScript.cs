@@ -48,7 +48,7 @@ public class DudeScript : MonoBehaviour
             Rigidbody r = t.GetComponent<Rigidbody>();
             if (r != null)
             {
-                r.AddForce(bounceDirection * force, ForceMode.Acceleration);
+                r.AddForce(bounceDirection * force, ForceMode.VelocityChange);
             }
             ApplyForce(t, bounceDirection);
         }
