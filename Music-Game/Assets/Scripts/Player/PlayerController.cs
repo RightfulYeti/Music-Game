@@ -45,10 +45,14 @@ public class PlayerController : MonoBehaviour
         if (Move > 0 && !FacingRight)
         {
             Flip();
+            PlayerAnimator.SetBool("Left", true);
+            PlayerAnimator.SetBool("Right", false);
         }
         else if (Move < 0 && FacingRight)
         {
             Flip();
+            PlayerAnimator.SetBool("Left", false);
+            PlayerAnimator.SetBool("Right", true);
         }
 
         GroundCollisions = Physics.OverlapSphere(GroundCheck.position, GroundCheckRadius, GroundLayer);
@@ -92,9 +96,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Dude")
+        if (collision.transform.tag == "MotherNature")
         {
-            OnGround = true;
+            Time.timeScale = 0;
         }
+        print(collision.transform.name);
+        OnGround = true;
     }
 }
