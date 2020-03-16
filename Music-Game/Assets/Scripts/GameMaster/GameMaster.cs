@@ -8,10 +8,11 @@ public class GameMaster : MonoBehaviour
     public GameObject[] Men;
     public GameObject RB;
     public GameObject PlayerRef;
-
+    private GameObject SpawnedDude;
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -19,7 +20,8 @@ public class GameMaster : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T) && !Done)
         {
-            Instantiate(Men[Random.Range(0, Men.Length)]);
+            SpawnedDude = Instantiate(Men[Random.Range(0, Men.Length)]);
+            SpawnedDude.transform.position = new Vector3(Random.Range(0, Camera.ScreenToWorldPoint(Screen.width)), Random.Range(), Random.Range());
             //RB = Men[0].GetComponent<Rigidbody>();
             Done = true;
         }
