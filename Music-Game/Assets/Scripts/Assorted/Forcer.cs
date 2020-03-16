@@ -39,7 +39,6 @@ public class Forcer : MonoBehaviour
                 joint.connectedBody = other.contacts[0].otherCollider.transform.GetComponentInParent<Rigidbody>();
                 // Stops objects from continuing to collide and creating more joints
                 joint.enableCollision = true;
-                print(transform.name);
                 hasCollided = true;
             }
         }

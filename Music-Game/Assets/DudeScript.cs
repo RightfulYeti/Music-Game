@@ -16,14 +16,13 @@ public class DudeScript : MonoBehaviour
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit, ray_length)) 
         {
-            if (hit.collider.gameObject.tag == "Umbrella") 
+            if (hit.collider.gameObject.tag == "Umbrella" && !hasBounced) 
             {
                 Vector3 BounceDir = Vector3.Reflect(ray.direction, hit.normal);
                 BounceDir = BounceDir.normalized;
                 BounceDir = new Vector3(BounceDir.x, BounceDir.y, 0);
                 ApplyForce(transform, BounceDir);
                 hasBounced = true;
-
             }
         }
     }

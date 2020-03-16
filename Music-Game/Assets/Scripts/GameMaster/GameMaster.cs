@@ -9,25 +9,32 @@ public class GameMaster : MonoBehaviour
     public GameObject RB;
     public GameObject PlayerRef;
     private GameObject SpawnedDude;
+    public GameObject RightWall;
+    public GameObject LeftWall;
+    private float MaxSpawnX;
+    private float MaxSpawnY;
+    private float SpawnTimer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //MaxSpawnX = Camera.main.ScreenToWorldPoint(new Vector3(RightWall.transform.position.x, 0, 0)).x;
+        MaxSpawnX = RightWall.transform.position.x;
+        MaxSpawnY = PlayerRef.transform.position.y + 15;
+        print(MaxSpawnX);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && !Done)
+        SpawnTimer += Time.deltaTime;
+
+        if (SpawnTimer >= 2.0f && !Done)
         {
             SpawnedDude = Instantiate(Men[Random.Range(0, Men.Length)]);
-            SpawnedDude.transform.position = new Vector3(Random.Range(0, Camera.ScreenToWorldPoint(Screen.width)), Random.Range(), Random.Range());
+            SpawnedDude.transform.position = new Vector3(Random.Range(LeftWall.transform.position.x, MaxSpawnX), MaxSpawnY, 0);
             //RB = Men[0].GetComponent<Rigidbody>();
-            Done = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            Done = false;
+            SpawnTimer = 0;
         }
 
         //CopyTransformsRecurse(transform, RB.transform);
