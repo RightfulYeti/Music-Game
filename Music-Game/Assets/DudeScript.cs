@@ -6,12 +6,6 @@ public class DudeScript : MonoBehaviour
     public int force = 800;
     bool hasBounced = false;
 
-    private void Start() {
-        foreach (Transform t in transform.root.transform) {
-            Physics.IgnoreCollision(GetComponent<Collider>(), t.gameObject.GetComponent<Collider>(), true);
-        }
-    }
-
     private void FixedUpdate() 
     {
         Vector3 down = new Vector3(transform.position.x, transform.position.y - ray_length, transform.position.z);
@@ -40,7 +34,7 @@ public class DudeScript : MonoBehaviour
             Rigidbody r = t.GetComponent<Rigidbody>();
             if (r != null)
             {
-                r.AddForce(bounceDirection * force, ForceMode.VelocityChange);
+                r.AddForce(bounceDirection * force, ForceMode.Acceleration);
             }
             ApplyForce(t, bounceDirection);
         }
