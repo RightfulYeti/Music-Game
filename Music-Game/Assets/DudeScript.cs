@@ -6,6 +6,20 @@ public class DudeScript : MonoBehaviour
     public int force = 800;
     bool hasBounced = false;
 
+    //private void Start() {
+    //    ignoreCollision(transform);
+    //}
+
+    //private void ignoreCollision(Transform target) {
+    //    foreach (Transform t in target) {
+    //        Collider col = t.gameObject.GetComponent<Collider>();
+    //        if (col != null) {
+    //            Physics.IgnoreCollision(GetComponent<Collider>(), t.gameObject.GetComponent<Collider>(), true);   
+    //        }
+    //        ignoreCollision(t);
+    //    }
+    //}
+
     private void FixedUpdate() 
     {
         Vector3 down = new Vector3(transform.position.x, transform.position.y - ray_length, transform.position.z);
