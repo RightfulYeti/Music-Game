@@ -27,18 +27,30 @@ public class GameMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpawnTimer += Time.deltaTime;
+        //SpawnTimer += Time.deltaTime;
 
-        if (SpawnTimer >= 2.0f && !Done)
+        //if (SpawnTimer >= 2.0f && !Done)
+        //{
+        //    SpawnedDude = Instantiate(Men[Random.Range(0, Men.Length)]);
+        //    SpawnedDude.transform.position = new Vector3(Random.Range(LeftWall.transform.position.x, MaxSpawnX), MaxSpawnY, 0);
+        //    //RB = Men[0].GetComponent<Rigidbody>();
+        //    SpawnTimer = 0;
+        //}
+
+        if (Input.GetKeyDown(KeyCode.T) && !Done)
         {
             SpawnedDude = Instantiate(Men[Random.Range(0, Men.Length)]);
-            SpawnedDude.transform.position = new Vector3(Random.Range(LeftWall.transform.position.x, MaxSpawnX), MaxSpawnY, 0);
+            SpawnedDude.transform.position = new Vector3(0, 15, 0);
             //RB = Men[0].GetComponent<Rigidbody>();
-            SpawnTimer = 0;
+            Done = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Done = false;
         }
 
         //CopyTransformsRecurse(transform, RB.transform);
-            ApplyForce(RB.transform);
+        ApplyForce(RB.transform);
     }
 
     private void ApplyForce(Transform target)

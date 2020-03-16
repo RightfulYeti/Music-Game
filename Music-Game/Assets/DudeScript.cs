@@ -16,7 +16,7 @@ public class DudeScript : MonoBehaviour
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit, ray_length)) 
         {
-            if (hit.collider.gameObject.tag == "Umbrella" && !hasBounced) 
+            if (hit.collider.gameObject.tag == "Umbrella") 
             {
                 Vector3 BounceDir = Vector3.Reflect(ray.direction, hit.normal);
                 BounceDir = BounceDir.normalized;

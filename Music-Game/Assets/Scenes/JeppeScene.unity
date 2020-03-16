@@ -414,7 +414,7 @@ MonoBehaviour:
       VolumeRandomness: 0
       PitchRandomness: 0
       StereoPan: 0
-      Mute: 0
+      Mute: 1
       Loop: 1
       output: {fileID: 24300002, guid: 7d08d7b222cb40c4ca8216c2ac365f6b, type: 2}
     RollOffSettings:
