@@ -15,10 +15,6 @@ public class Forcer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKey(KeyCode.T))
-        //{
-            //AddForceAtAngle(10, 90);
-        //}
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,13 +22,6 @@ public class Forcer : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        //if (other.transform.tag == "Thing")
-        //{
-        //    //AddForceAtAngle(100, Vector3.Angle(other.transform.position, transform.position)-45);
-        //    Vector3 direction = transform.position - other.transform.position;
-        //    GetComponent<Rigidbody2D>().AddRelativeForce(direction * 2500);
-        //    print(Vector3.Angle(other.transform.position, transform.position)-45);
-        //}
         if (other.transform.tag == "Wall")
         {
             if (!hasCollided) 

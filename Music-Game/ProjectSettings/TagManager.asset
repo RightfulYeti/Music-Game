@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Umbrella
   - Dude
+  - FixedDude
   layers:
   - Default
   - TransparentFX

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private float Timer;
     Vector3 minScreenBounds;
     Vector3 maxScreenBounds;
+    public Animator PlayerAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -43,12 +44,10 @@ public class PlayerController : MonoBehaviour
 
         if (Move > 0 && !FacingRight)
         {
-           // print("Flipped");
             Flip();
         }
         else if (Move < 0 && FacingRight)
         {
-            //print("Flipped");
             Flip();
         }
 
@@ -57,17 +56,19 @@ public class PlayerController : MonoBehaviour
         if (GroundCollisions.Length > 0 || DudeCollisions.Length > 0)
         {
             OnGround = true;
+            PlayerAnimator.SetBool("Jumping", false);
         }
         else
         {
             OnGround = false;
+            PlayerAnimator.SetBool("Jumping", true);
         }
 
         if (OnGround && Input.GetAxis("Jump") > 0)
         {
-            //print("jump");
             OnGround = false;
             RB.AddForce(new Vector3(0, JumpPower, 0));
+            PlayerAnimator.SetBool("Jumping", true);
         }
 
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minScreenBounds.x + 1, maxScreenBounds.x - 1), Mathf.Clamp(transform.position.y, minScreenBounds.y + 1, maxScreenBounds.y - 1), transform.position.z);
